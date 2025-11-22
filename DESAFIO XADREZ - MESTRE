@@ -1,0 +1,116 @@
+#include <stdio.h>
+
+/*
+  xadrez.c
+  Simulação de movimentos avançados no tabuleiro:
+  - Torre (recursividade)
+  - Bispo (recursividade + loops aninhados)
+  - Rainha (recursividade)
+  - Cavalo (loops complexos, múltiplas variáveis e controle de fluxo)
+  Desenvolvedor: ELTHON
+*/
+
+/* -------------------------------
+   Função recursiva para a Torre
+   Move-se apenas em linha reta.
+   Aqui: 5 casas para a direita.
+-------------------------------- */
+void moverTorre(int casas) {
+    if (casas == 0) return;       // caso base
+    printf("Direita\n");          // imprime movimento
+    moverTorre(casas - 1);        // chamada recursiva
+}
+
+/* -------------------------------
+   Função recursiva para a Rainha
+   Move-se em todas as direções.
+   Aqui: 8 casas para a esquerda.
+-------------------------------- */
+void moverRainha(int casas) {
+    if (casas == 0) return;       // caso base
+    printf("Esquerda\n");
+    moverRainha(casas - 1);
+}
+
+/* -------------------------------
+   Função recursiva para o Bispo
+   Move-se na diagonal.
+   Aqui: 5 casas na diagonal cima-direita.
+   Além da recursão, usamos loops aninhados
+   para representar "Cima" e "Direita".
+-------------------------------- */
+void moverBispo(int casas) {
+    if (casas == 0) return;       // caso base
+
+    // Loop externo (vertical = cima)
+    for (int v = 0; v < 1; v++) {
+        // Loop interno (horizontal = direita)
+        for (int h = 0; h < 1; h++) {
+            printf("Cima, Direita\n");
+        }
+    }
+
+    moverBispo(casas - 1);        // chamada recursiva
+}
+
+/* -------------------------------
+   Movimento do Cavalo
+   Duas casas para cima e uma para a direita.
+   Implementado com loops aninhados,
+   múltiplas variáveis e controle de fluxo.
+-------------------------------- */
+void moverCavalo(void) {
+    int movimentosCima = 2;    // casas para cima
+    int movimentosDireita = 1; // casas para direita
+
+    printf("\nMovimento do Cavalo:\n");
+
+    // Loop externo controla casas para cima
+    for (int i = 0, j = movimentosCima; i < j; i++) {
+        if (i == 1) {
+            // exemplo de uso de continue
+            // (aqui poderíamos pular uma condição,
+            // mas neste caso apenas mostramos que sabemos usar)
+            continue;
+        }
+        printf("Cima\n");
+    }
+
+    // Loop interno controla casas para direita
+    int k = 0;
+    while (k < movimentosDireita) {
+        printf("Direita\n");
+
+        // Exemplo de controle com break
+        if (k == 0) {
+            break; // só precisamos de 1 casa para direita
+        }
+        k++;
+    }
+}
+
+/* -------------------------------
+   Função principal
+-------------------------------- */
+int main(void) {
+    
+
+    // Torre (recursiva)
+    printf("Movimento da Torre:\n");
+    moverTorre(5);
+
+    // Bispo (recursiva + loops aninhados)
+    printf("\nMovimento do Bispo:\n");
+    moverBispo(5);
+
+    // Rainha (recursiva)
+    printf("\nMovimento da Rainha:\n");
+    moverRainha(8);
+
+    // Cavalo (loops complexos)
+    moverCavalo();
+
+    
+
+    return 0;
+}
